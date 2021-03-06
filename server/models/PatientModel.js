@@ -3,62 +3,67 @@ const Schema = mongoose.Schema;
 const PatientSchema = new Schema({
     adhaarNo:{
         type:String, //adhaar number
-        require:true
+        required:true,
+        // unique:true //uncomment this after testing
     },
     fname:{
         type:String,
-        require:true
+        required:true
     },
     lname:{
         type:String,
-        require:true
+        required:true
     },
     contact:{
         patientMobile:{
             type:String,
-            require:true
+            required:true
         },
         familyMemberMobile:{
             type:String,
-            require:false
+            required:false
         }
+    },
+    email:{
+        type:String,
+        required:true,
+        // unique:true //uncomment this after testing
     },
     name:{
         type:String,
-        require:false,
-        default:this.fname+' '+this.lname,
+        required:true
     },
     motherName:{
         type:String,
-        require:false,
+        required:false,
     },
     fatherName:{
         type:String,
-        require:false,
+        required:false,
     },
     dateOFBirth:{
         type:String,
-        require:false,
+        required:false,
     },
     height:{
         type:Number,// in centi-meter
-        require:false,
+        required:false,
     },
     weight:{
         type:Number, // in kg
-        require:false,
+        required:false,
     },
     gender:{
         type:String,
-        require:true,
+        required:true,
     },
     BMI:{
         type:String,
-        require:false,
+        required:false,
     },
     createdDate:{
         type:Date,
-        require:false,
+        required:false,
         default:Date.now
     }
 });

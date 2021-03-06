@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const PatientDocumentSchema = Schema({
     'PatientId':{
-        type:Schema.Tpes.ObjectId,
-        require:true
+        type:Schema.Types.ObjectId,
+        required:true
     },
     'name':{
         type:String,
-        require:true
+        required:true
     },
     'description':{
         type:String,
-        require:false
+        required:false
     },
     'CreateDate':{
         type:String,
