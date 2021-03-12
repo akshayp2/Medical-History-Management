@@ -4,7 +4,6 @@ const { getConnetion } = require('../dbutils/dbConnection.js');
 const PatientModel = require('../models/PatientModel');
 const PatientDocumentModel = require('../models/PatientDocuments');
 const ClinicModel = require('../models/ClinicModel');
-const CPMappingModel = require('../models/ClinicPatientMappingModel');
 const CPModel = require('../models/ClinicPatientMappingModel');
 console.log('Connection '+getConnetion());
 app.use(express.json());
