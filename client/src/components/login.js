@@ -7,7 +7,23 @@ function Login() {
     const [showModel, setshowModel] = useState(true);
     const [isAdhaar, setIsAdhaar] = useState(true);
     const [radioSelected, setRadioSelected] = useState('Patient');
-    console.log('login')
+    const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':''});
+    // console.log('login')
+    let handleChange = e =>{
+        // console.log('event on field',e.target.name)
+        let name = e.target.name
+        setUserDetails(prevState=>({
+            ...prevState,
+            [name]:e.target.value
+        }));
+    }
+    let handleChangeRadio = e => {
+        let isPatient = e.target.value =='Clinic'?false:true;
+        console.log('isPatient ',isPatient);
+        setRadioSelected(e.target.value);
+        isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
+        setUserDetails({'isPatient':isPatient,'adhaarNumber':'','email':'','password':''});
+    }
     return (
         <div>
             <Modal show={showModel} onHide={() => setshowModel(false)}>
@@ -19,15 +35,15 @@ function Login() {
                     <form>
                         <div className="form-group" hidden={isAdhaar}>
                             <label>Email</label>
-                            <input type="email" className="form-control" placeholder="Enter email" />
+                            <input type="email" className="form-control" placeholder="Enter email" name="email" value={userDetails.email} onChange={handleChange}/>
                         </div>
                         <div className="form-group" hidden={!isAdhaar}>
                             <label>Adhaar Number</label>
-                            <input type="tect" className="form-control" placeholder="Enter Adhaar Number" />
+                            <input type="text" className="form-control" placeholder="Enter Adhaar Number" name="adhaarNumber" value={userDetails.adhaarNumber} onChange={handleChange}/>
                         </div>
                         <div className="form-group">
                             <label>Password</label>
-                            <input type="password" className="form-control" placeholder="Enter password" />
+                            <input type="password" className="form-control" placeholder="Enter password" name="password" value={userDetails.password} onChange={handleChange} />
                         </div>
                         <div className="form-group">
                             <div className="custom-control custom-checkbox">
@@ -35,7 +51,7 @@ function Login() {
                                 <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
+                        
                         <p className="forgot-password text-right">
                             Forgot <a href="forget#">password?</a>
                         </p>
@@ -47,10 +63,7 @@ function Login() {
                                 className="form-check-input"
                                 id="inlineRadio2"
                                 value="Patient"
-                                onChange={(e) => {
-                                    setRadioSelected(e.target.value);
-                                    setIsAdhaar(true);
-                                }} />
+                                onChange={handleChangeRadio} />
                             <label className="form-check-label" htmlFor="inlineRadio2">Patient</label>
                         </div>
                         <div className="form-check form-check-inline">
@@ -59,10 +72,7 @@ function Login() {
                                 id="inlineRadio1"
                                 className="form-check-input"
                                 value="Clinic"
-                                onChange={(e) => {
-                                    setRadioSelected(e.target.value);
-                                    setIsAdhaar(false);
-                                }} />
+                                onChange={handleChangeRadio} />
                             <label className="form-check-label" htmlFor="inlineRadio1">Clinic</label>
                         </div>
                         <div className="form-check form-check-inline">
@@ -71,10 +81,7 @@ function Login() {
                                 className="form-check-input"
                                 id="inlineRadio3"
                                 value="Guest"
-                                onChange={(e) => {
-                                    setRadioSelected(e.target.value);
-                                    setIsAdhaar(true);
-                                }} />
+                                onChange={handleChangeRadio} />
                             <label className="form-check-label" htmlFor="inlineRadio3">Guest</label>
                         </div>
                     </div>
@@ -82,7 +89,9 @@ function Login() {
                 <Modal.Footer>
                     <Link to="/register" className="register_link"> click here to register</Link>
                     <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)}>Close</Link>
-                    <Button variant="primary">Save changes</Button>
+                    <Button variant="primary" onClick={()=>{
+                        console.log('UserDetails ',userDetails);
+                    }}>Login</Button>
                 </Modal.Footer>
             </Modal>
         </div>
