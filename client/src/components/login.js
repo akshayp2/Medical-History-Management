@@ -24,6 +24,15 @@ function Login() {
         isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'isPatient':isPatient,'adhaarNumber':'','email':'','password':''});
     }
+    let handleLogin = e => {
+        console.log('UserDetails ',userDetails);
+        // current changes
+        if(userDetails.adhaarNumber=='123' && userDetails.password=='abc'){
+
+        }else{
+
+        }
+    }
     return (
         <div>
             <Modal show={showModel} onHide={() => {
@@ -92,9 +101,7 @@ function Login() {
                 <Modal.Footer>
                     <Link to="/register" className="register_link"> click here to register</Link>
                     <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)}>Close</Link>
-                    <Button variant="primary" onClick={()=>{
-                        console.log('UserDetails ',userDetails);
-                    }}>Login</Button>
+                    <Button variant="primary" onClick={handleLogin}>Login</Button>
                 </Modal.Footer>
             </Modal>
         </div>

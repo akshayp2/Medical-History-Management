@@ -1,5 +1,5 @@
 import { Button,Modal} from 'react-bootstrap';
-import React, { useState } from "react"; 
+import React, { useEffect, useState } from "react"; 
 import {Link} from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 function Register(){
@@ -7,8 +7,12 @@ function Register(){
     const [isAdhaar, setIsAdhaar] = useState(true);
     const [radioSelected, setRadioSelected] = useState('Patient');
     const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true});
-    const [otp,setOtp] = useState(0); 
-    // console.log('Form called')
+    const [otp,setOtp] = useState(0);
+    const [otpFlag,setOtpFlag] = useState(true);
+    
+    useEffect(()=>{
+        console.log('sometihing happen');
+    })
 
     let handleChange = e =>{
         // console.log('event on field',e.target.name)
@@ -33,7 +37,7 @@ function Register(){
 
     }
 
-        return (
+        return otpFlag?(
             <Modal show={showModel} onHide={()=>{
                 setshowModel(false);
                 window.location.replace('/');
@@ -128,23 +132,44 @@ function Register(){
                             <label className="form-check-label" htmlFor="inlineRadio3">Guest</label>
                         </div>
                     </div>
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
-                <OtpInput
-                    value={otp}
-                    onChange={handleChangeOtp}
-                    numInputs={4}
-                    separator={<span>-</span>}
-                />
             </form>
             </Modal.Body>
             <Modal.Footer>
                 <Link to="/login" className="register_link forgot-password text-right"> click here to login</Link>
-                <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)}>Close</Link>
+                <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)
+                    }>Close</Link>
                 <Button variant="primary" onClick={()=>{
                     console.log('userDetails ',userDetails);
+                    setOtpFlag(false);
                 }}>Sign up</Button>
             </Modal.Footer>
         </Modal>
-        );
+        ):(<Modal show={showModel} onHide={()=>{
+            setshowModel(false);
+            window.location.replace('/');
+            }}>
+            <Modal.Header closeButton>
+                <Modal.Title>Register</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <div className="card-body">
+             <OtpInput
+                 className="otpcls"
+                 value={otp}
+                 onChange={handleChangeOtp}
+                 numInputs={4}
+                 separator={<span>O</span>}
+             />
+             </div> </Modal.Body>
+            <Modal.Footer>
+                <Link to="/login" className="register_link forgot-password text-right"> click here to login</Link>
+                <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)
+                    }>Close</Link>
+                <Button variant="primary" onClick={()=>{
+                    console.log('userDetails ',userDetails);
+                    
+                }}>Sign up</Button>
+            </Modal.Footer>
+        </Modal>);
 }
 export default Register;
