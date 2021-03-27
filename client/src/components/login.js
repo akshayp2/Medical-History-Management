@@ -26,7 +26,10 @@ function Login() {
     }
     return (
         <div>
-            <Modal show={showModel} onHide={() => setshowModel(false)}>
+            <Modal show={showModel} onHide={() => {
+                setshowModel(false)
+                window.location.replace('/');
+                }}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>
                 </Modal.Header>

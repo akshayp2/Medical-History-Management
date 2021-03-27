@@ -1,39 +1,42 @@
 import './App.css';
 import React from "react";
-import {  Navbar, Nav, NavDropdown, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Register from './components/register';
+import Header from './components/header';
+import BootstrapCarousel from './components/carousel';
+import OurClient from './components/ourClient';
+import Team from './components/team';
+import OurServices from './components/ourServices';
+import Address from './components/address';
 
 function App() {
   return (<div>
     <Router>
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-          <Form inline>
-            <Link to="/login" className="btn btn-primary">Login</Link>
-          </Form>
-        </Navbar.Collapse>
-      </Navbar>
-
-      <Route path="/register" component={Register}></Route>
-      <Route path="/login" component={Login}></Route>
-
+      <Header/>
+      <Route exact strict path="/register" component={Register}></Route>
+      <Route exact strict path="/login" component={Login}></Route>
+      <Route exact strict path="/contact" component={Address}></Route>
     </Router>
+    <BootstrapCarousel></BootstrapCarousel>
+    <div className="container-fluid">
+    <h3 className="row justify-content-center subheader p-2">Our client</h3>
+    <div className="row justify-content-center">
+      <div className="col-xs-6 col-sm-6 col-md-3">
+        <OurClient imagesrc="http://wallpaperheart.com/wp-content/uploads/2018/08/4k-ultra-hd-wallpaper-6.jpg" title="abc" caption="With supporting text below as a natural lead-in to additional content."></OurClient>
+      </div>
+      <div className="col-xs-6 col-sm-6 col-md-3">
+        <OurClient imagesrc="http://wallpaperheart.com/wp-content/uploads/2018/08/4k-ultra-hd-wallpaper-6.jpg" title="abc" caption="With supporting text below as a natural lead-in to additional content."></OurClient>
+      </div>
+      <div className="col-xs-6 col-sm-6 col-md-3">
+        <OurClient imagesrc="http://wallpaperheart.com/wp-content/uploads/2018/08/4k-ultra-hd-wallpaper-6.jpg" title="abc" caption="With supporting text below as a natural lead-in to additional content."></OurClient>
+      </div>
+    </div>
+    </div>
+    <Team></Team>
+    <OurServices></OurServices>
+    <Address></Address>
   </div>
   );
 }
