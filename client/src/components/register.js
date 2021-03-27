@@ -34,7 +34,10 @@ function Register(){
     }
 
         return (
-            <Modal show={showModel} onHide={()=>setshowModel(false)}>
+            <Modal show={showModel} onHide={()=>{
+                setshowModel(false);
+                window.location.replace('/');
+                }}>
                 <Modal.Header closeButton>
                     <Modal.Title>Register</Modal.Title>
                 </Modal.Header>
