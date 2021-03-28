@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
+import OtpInput from 'react-otp-input';
 import { Link } from 'react-router-dom';
 
 function Login() {
@@ -8,6 +9,9 @@ function Login() {
     const [isAdhaar, setIsAdhaar] = useState(true);
     const [radioSelected, setRadioSelected] = useState('Patient');
     const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':''});
+    const [isGuest,setIsguest] = useState(false);
+    const [isotp,setIsOtp] = useState(false);
+    const [otp,setOtp] = useState(0);
     // console.log('login')
     let handleChange = e =>{
         // console.log('event on field',e.target.name)
@@ -23,17 +27,32 @@ function Login() {
         setRadioSelected(e.target.value);
         isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'isPatient':isPatient,'adhaarNumber':'','email':'','password':''});
+        if(e.target.value=='Guest'){
+            setIsguest(true);
+        }else{
+            setIsguest(false);
+        }
     }
     let handleLogin = e => {
         console.log('UserDetails ',userDetails);
-        // current changes
+        if(isGuest){
+            setIsOtp(true);
+        }
         if(userDetails.adhaarNumber=='123' && userDetails.password=='abc'){
 
         }else{
 
         }
     }
-    return (
+    let handleChangeOtp = otp =>{
+        console.log('OTP ',otp);
+        setOtp(otp);
+
+    }
+    useEffect(()=>{
+       
+    });
+    return !isotp?(
         <div>
             <Modal show={showModel} onHide={() => {
                 setshowModel(false)
@@ -44,7 +63,7 @@ function Login() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <form>
+                    <form hidden={isGuest}>
                         <div className="form-group" hidden={isAdhaar}>
                             <label>Email</label>
                             <input type="email" className="form-control" placeholder="Enter email" name="email" value={userDetails.email} onChange={handleChange}/>
@@ -67,6 +86,12 @@ function Login() {
                         <p className="forgot-password text-right">
                             Forgot <a href="forget#">password?</a>
                         </p>
+                    </form>
+                    <form hidden={!isGuest}>
+                        <div className="form-group">
+                                <label>Phone</label>
+                                <input type="text" className="form-control" placeholder="Enter phone" name="phone" value={userDetails.email} onChange={handleChange}/>
+                        </div>
                     </form>
                     <div>
                         <div className="form-check form-check-inline">
@@ -105,7 +130,33 @@ function Login() {
                 </Modal.Footer>
             </Modal>
         </div>
-    );
+    ):(<Modal show={showModel} onHide={()=>{
+        setshowModel(false);
+        window.location.replace('/');
+        }}>
+        <Modal.Header closeButton>
+            <Modal.Title>Register</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <div className="card-body">
+         <OtpInput
+             className="otpcls"
+             value={otp}
+             onChange={handleChangeOtp}
+             numInputs={4}
+             separator={<span>O</span>}
+         />
+         </div> </Modal.Body>
+        <Modal.Footer>
+            
+            <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)
+                }>Close</Link>
+            <Button variant="primary" onClick={()=>{
+                console.log('userDetails ',userDetails);
+                
+            }}>Sign up</Button>
+        </Modal.Footer>
+    </Modal>);
 }
 
 export default Login;

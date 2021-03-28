@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 function Register(){
     const [showModel,setshowModel ]=useState(true);
-    const [isAdhaar, setIsAdhaar] = useState(true);
-    const [radioSelected, setRadioSelected] = useState('Patient');
+    const [isAdhaar, setIsAdhaar] = useState(false);
+    const [radioSelected, setRadioSelected] = useState('Clinic');
     const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true});
     const [otp,setOtp] = useState(0);
     const [otpFlag,setOtpFlag] = useState(true);
@@ -109,6 +109,7 @@ function Register(){
                                 checked={radioSelected === "Patient"}
                                 className="form-check-input"
                                 id="inlineRadio2"
+                                disabled
                                 value="Patient"
                                 onChange={handleChangeradio} />
                             <label className="form-check-label" htmlFor="inlineRadio2">Patient</label>
@@ -127,12 +128,13 @@ function Register(){
                                 checked={radioSelected === "Guest"}
                                 className="form-check-input"
                                 id="inlineRadio3"
+                                disabled
                                 value="Guest"
                                 onChange={handleChangeradio}/>
                             <label className="form-check-label" htmlFor="inlineRadio3">Guest</label>
                         </div>
                     </div>
-            </form>
+            </form> 
             </Modal.Body>
             <Modal.Footer>
                 <Link to="/login" className="register_link forgot-password text-right"> click here to login</Link>
