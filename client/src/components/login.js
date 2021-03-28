@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
 import OtpInput from 'react-otp-input';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 function Login() {
     const [showModel, setshowModel] = useState(true);
@@ -38,16 +39,14 @@ function Login() {
         if(isGuest){
             setIsOtp(true);
         }
-        if(userDetails.adhaarNumber=='123' && userDetails.password=='abc'){
-
-        }else{
-
-        }
+        let obj = {email:userDetails.email,passwd:userDetails.password};
+        Axios.post(`http://localhost:5000/cliniclogin`,obj).then(res=>{
+            console.log('Login Response ',res);
+        }).catch(err=>console.log('login '+err));
     }
     let handleChangeOtp = otp =>{
         console.log('OTP ',otp);
         setOtp(otp);
-
     }
     useEffect(()=>{
        
@@ -153,8 +152,7 @@ function Login() {
                 }>Close</Link>
             <Button variant="primary" onClick={()=>{
                 console.log('userDetails ',userDetails);
-                
-            }}>Sign up</Button>
+            }}>Login</Button>
         </Modal.Footer>
     </Modal>);
 }
