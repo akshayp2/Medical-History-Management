@@ -89,8 +89,8 @@ function Login() {
                     </form>
                     <form hidden={!isGuest}>
                         <div className="form-group">
-                                <label>Phone</label>
-                                <input type="text" className="form-control" placeholder="Enter phone" name="phone" value={userDetails.email} onChange={handleChange}/>
+                                <label>Adhaar Number</label>
+                                <input type="text" className="form-control" placeholder="Enter Adhaar Number" name="adhaar_number" value={userDetails.email} onChange={handleChange}/>
                         </div>
                     </form>
                     <div>

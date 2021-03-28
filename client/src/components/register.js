@@ -9,6 +9,7 @@ function Register(){
     const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true});
     const [otp,setOtp] = useState(0);
     const [otpFlag,setOtpFlag] = useState(true);
+    const [isGuest,setIsguest] = useState(false);
     
     useEffect(()=>{
         console.log('sometihing happen');
@@ -29,6 +30,11 @@ function Register(){
         setRadioSelected(e.target.value);
         isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient});
+        if(e.target.value=='Guest'){
+            setIsguest(true);
+        }else{
+            setIsguest(false);
+        }
     }
     
     let handleChangeOtp = otp =>{
@@ -89,7 +95,7 @@ function Register(){
                     </div>
                 </div>
                 </div>
-                <div className="row">
+                <div className="row" hidden={isGuest}>
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
                             <label>Password</label>
@@ -128,7 +134,6 @@ function Register(){
                                 checked={radioSelected === "Guest"}
                                 className="form-check-input"
                                 id="inlineRadio3"
-                                disabled
                                 value="Guest"
                                 onChange={handleChangeradio}/>
                             <label className="form-check-label" htmlFor="inlineRadio3">Guest</label>
