@@ -125,7 +125,7 @@ function Login() {
                 <Modal.Footer>
                     <Link to="/register" className="register_link"> click here to register</Link>
                     <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)}>Close</Link>
-                    <Button variant="primary" onClick={handleLogin}>Login</Button>
+                    <Link to="/clinicdashboard" className="btn btn-primary" onClick={handleLogin}>Login</Link>
                 </Modal.Footer>
             </Modal>
         </div>

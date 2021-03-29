@@ -6,7 +6,7 @@ function Register(){
     const [showModel,setshowModel ]=useState(true);
     const [isAdhaar, setIsAdhaar] = useState(false);
     const [radioSelected, setRadioSelected] = useState('Clinic');
-    const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true});
+    const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true,'clinicname':''});
     const [otp,setOtp] = useState(0);
     const [otpFlag,setOtpFlag] = useState(true);
     const [isGuest,setIsguest] = useState(false);
@@ -29,7 +29,7 @@ function Register(){
         console.log('isPatient ',isPatient);
         setRadioSelected(e.target.value);
         isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
-        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient});
+        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient,'clinicname':''});
         if(e.target.value=='Guest'){
             setIsguest(true);
         }else{
@@ -53,7 +53,7 @@ function Register(){
                 </Modal.Header>
                 <Modal.Body>
             <form>
-                <div className="row">
+                <div className="row" hidden={!isAdhaar}>
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
                             <label>First name</label>
@@ -66,6 +66,12 @@ function Register(){
                             <input type="text" name="lname" className="form-control" placeholder="Last name" value={userDetails.lname} onChange={handleChange}/>
                         </div>
                     </div>
+                </div>
+                <div className="row">
+                <div className="col-xs-6 col-sm-6 col-md-12">    
+                <label>Clinic Name</label>
+                            <input type="text" className="form-control" placeholder="Enter Clinic Name" name="clinicname" value={userDetails.clinicname} onChange={handleChange}/>
+                </div>
                 </div>
                 <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6">
