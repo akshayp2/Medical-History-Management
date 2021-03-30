@@ -15,9 +15,15 @@ return(
        </div>
     </div>
     <div className="col-xs-6 col-sm-6 col-md-5 mt-5">
-        <GrView size="1.5em"  className="iconcmp" onClick={(e)=>console.log("View",id)}/><label style={{paddingLeft:'5px'}}>View</label>
-        <FaEdit size="1.5em"  color="#007BFF" className="iconcmp ml-4" onClick={(e)=>console.log("Edit",id)}/><label style={{paddingLeft:'5px'}}>Edit</label>
-        <MdDelete size="1.5em"  color="rgb(241, 72, 50)" className="iconcmp ml-4" onClick={(e)=>console.log("Delete",id)}/><label style={{paddingLeft:'5px'}}>Delete</label>
+        <span  className="iconcmp" onClick={(e)=>console.log("View",id)}>
+        <GrView size="1.5em" /><span style={{paddingLeft:'5px'}}>View</span>
+        </span>
+        <span className="iconcmp ml-4" onClick={(e)=>console.log("Edit",id)}>
+        <FaEdit size="1.5em"  color="#007BFF" /><span style={{paddingLeft:'5px'}}>Edit</span>
+        </span>
+        <span className="iconcmp ml-4" onClick={(e)=>console.log("Delete",id)}>
+        <MdDelete size="1.5em"  color="rgb(241, 72, 50)" /><span style={{paddingLeft:'5px'}}>Delete</span>
+        </span>
     </div>
 </div>
 );

@@ -3,10 +3,11 @@
 .App {
   text-align: center;
 }
-.App {
-  text-align: center;
-}* {
+*{
   box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
 }
 
 body {
@@ -125,9 +126,17 @@ body, html, .App, #root, .outer {
   cursor: pointer;
 }
 .listUser{
-  height:400px;
+  height:550px;
   overflow-y: scroll;
   overflow-x: hidden;
   border-top: 2px solid;
- 
+  border-bottom: 2px solid gray;
+}
+.align-left {
+  text-align: left;
+}
+
+.push-right {
+  float: right;
+  margin-top: 5px;
 }
