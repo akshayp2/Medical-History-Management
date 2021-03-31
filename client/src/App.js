@@ -7,12 +7,16 @@ import Register from './components/register';
 import Header from './components/header';
 import Address from './components/address';
 import Home from './components/home';
+import PatientD from './components/PatientDashboard';
+import ClinicD from './components/ClinicDashbord';
 import ClinicDashboard from './components/clinicDashboard';
+
 
 
 function App() {
   return (<div>
     <Router>
+
       <Header/>
       <Switch>
       <Route exact strict path="/">
@@ -32,13 +36,19 @@ function App() {
       <Route exact strict path="/contact">
         <Address/>
       </Route>
+      <Route exact strict path="/clinicd">
+       <ClinicD></ClinicD>
+      </Route>
+      <Route exact strict path="/patientd">
+      <PatientD></PatientD>
+
       <Route exact strict path="/clinicdashboard">
         <ClinicDashboard/>
       </Route>
       </Switch>
     </Router>
-    
   </div>
+ 
   );
 }
 
