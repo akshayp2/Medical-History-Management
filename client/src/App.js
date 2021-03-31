@@ -11,10 +11,10 @@ import PatientD from './components/PatientDashboard';
 import ClinicD from './components/ClinicDashbord';
 
 
-
 function App() {
   return (<div>
     <Router>
+
       <Header/>
       <Switch>
       <Route exact strict path="/">
@@ -42,7 +42,6 @@ function App() {
       </Route>
       </Switch>
     </Router>
-  
   </div>
  
   );
