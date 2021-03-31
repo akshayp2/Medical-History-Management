@@ -7,6 +7,9 @@ import Register from './components/register';
 import Header from './components/header';
 import Address from './components/address';
 import Home from './components/home';
+import PatientD from './components/PatientDashboard';
+import ClinicD from './components/ClinicDashbord';
+
 
 
 function App() {
@@ -31,10 +34,17 @@ function App() {
       <Route exact strict path="/contact">
         <Address/>
       </Route>
+      <Route exact strict path="/clinicd">
+       <ClinicD></ClinicD>
+      </Route>
+      <Route exact strict path="/patientd">
+      <PatientD></PatientD>
+      </Route>
       </Switch>
     </Router>
-    
+  
   </div>
+ 
   );
 }
 

@@ -18,10 +18,10 @@ function Login() {
         }));
     }
     let handleChangeRadio = e => {
-        let isPatient = e.target.value =='Clinic'?false:true;
+        let isPatient = e.target.value ==='Clinic'?false:true;
         console.log('isPatient ',isPatient);
         setRadioSelected(e.target.value);
-        isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
+        isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'isPatient':isPatient,'adhaarNumber':'','email':'','password':''});
     }
     return (
@@ -92,9 +92,10 @@ function Login() {
                 <Modal.Footer>
                     <Link to="/register" className="register_link"> click here to register</Link>
                     <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)}>Close</Link>
-                    <Button variant="primary" onClick={()=>{
+                    <Link className="btn btn-primary" to='/patientd' onClick={()=>{
                         console.log('UserDetails ',userDetails);
-                    }}>Login</Button>
+
+                    }}>Login</Link>
                 </Modal.Footer>
             </Modal>
         </div>

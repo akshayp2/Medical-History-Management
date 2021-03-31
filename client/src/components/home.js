@@ -3,6 +3,8 @@ import OurClient from './ourClient';
 import Team from './team';
 import OurServices from './ourServices';
 import Address from './address';
+import PatientD from './PatientDashboard';
+import ClinicD from './ClinicDashbord';
 function Home() {
 return(
     <div>
@@ -24,6 +26,8 @@ return(
     <Team></Team>
     <OurServices></OurServices>
     <Address></Address>
+    <div  className="row justify-content-center">  <ClinicD></ClinicD></div>
+    <div  className="row-right">  <PatientD></PatientD></div>
     </div>
 );
 }

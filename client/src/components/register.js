@@ -20,10 +20,10 @@ function Register(){
     }
 
     let handleChangeradio = e =>{
-        let isPatient = e.target.value =='Clinic'?false:true;
+        let isPatient = e.target.value ==='Clinic'?false:true;
         console.log('isPatient ',isPatient);
         setRadioSelected(e.target.value);
-        isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
+        isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient});
     }
     
