@@ -8,6 +8,8 @@ import Header from './components/header';
 import Address from './components/address';
 import Home from './components/home';
 import ClinicDashboard from './components/clinicDashboard';
+import PersonDetails from './components/personDetails';
+
 
 
 function App() {
@@ -34,6 +36,9 @@ function App() {
       </Route>
       <Route exact strict path="/clinicdashboard">
         <ClinicDashboard/>
+      </Route>
+      <Route exact strict path="/persondetail/:personid">
+        <PersonDetails/>
       </Route>
       </Switch>
     </Router>
