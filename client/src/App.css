@@ -3,10 +3,11 @@
 .App {
   text-align: center;
 }
-.App {
-  text-align: center;
-}* {
+*{
   box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
 }
 
 body {
@@ -109,3 +110,34 @@ body, html, .App, #root, .outer {
   opacity: 1;*/
 }
 
+.otpcls{
+  width: 100%;
+  text-justify: auto;
+}
+.otpcls input{
+  width: 3em!important;
+}
+.otpcls span {
+  padding-left: 1.5em;
+}
+.img_avatar{
+  border-radius: 50px;
+}
+.iconcmp:hover{
+  cursor: pointer;
+}
+.listUser{
+  height:550px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-top: 2px solid;
+  border-bottom: 2px solid gray;
+}
+.align-left {
+  text-align: left;
+}
+
+.push-right {
+  float: right;
+  margin-top: 5px;
+}

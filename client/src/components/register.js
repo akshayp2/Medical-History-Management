@@ -1,14 +1,21 @@
 import { Button,Modal} from 'react-bootstrap';
-import React, { useState } from "react"; 
+import React, { useEffect, useState } from "react"; 
 import {Link} from 'react-router-dom';
 import OtpInput from 'react-otp-input';
+import axios from 'axios';
 function Register(){
     const [showModel,setshowModel ]=useState(true);
-    const [isAdhaar, setIsAdhaar] = useState(true);
-    const [radioSelected, setRadioSelected] = useState('Patient');
-    const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true});
-    const [otp,setOtp] = useState(0); 
-    // console.log('Form called')
+    const [isAdhaar, setIsAdhaar] = useState(false);
+    const [radioSelected, setRadioSelected] = useState('Clinic');
+    const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true,'clinicname':''});
+    const [otp,setOtp] = useState(0);
+    const [otpFlag,setOtpFlag] = useState(true);
+    const [isGuest,setIsguest] = useState(false);
+    const [inputOtp,setInputOtp] = useState(0);
+    
+    useEffect(()=>{
+        console.log('sometihing happen');
+    })
 
     let handleChange = e =>{
         // console.log('event on field',e.target.name)
@@ -23,17 +30,42 @@ function Register(){
         let isPatient = e.target.value ==='Clinic'?false:true;
         console.log('isPatient ',isPatient);
         setRadioSelected(e.target.value);
+
         isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient});
+
+        isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
+        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient,'clinicname':''});
+        if(e.target.value=='Guest'){
+            setIsguest(true);
+        }else{
+            setIsguest(false);
+        }
     }
     
     let handleChangeOtp = otp =>{
         console.log('OTP ',otp);
         setOtp(otp);
-
     }
 
-        return (
+    let handleRegister = evt => {
+        console.log('User Detail -->',userDetails);
+        setOtpFlag(false);
+        let obj = {phone:userDetails.mobile};
+        axios.post(`http://localhost:9000/otpverify`,obj).then(res=>{
+            console.log('Res -->',res);
+            setInputOtp(res.data);
+        }).catch(err=>console.log(err));
+    }
+    let handleOtpSubmit = e =>{
+        if(otp==inputOtp){
+            console.log("Register success");
+        }else{
+            console.log("Invalid OTP");
+        }
+    }
+
+        return otpFlag?(
             <Modal show={showModel} onHide={()=>{
                 setshowModel(false);
                 window.location.replace('/');
@@ -43,7 +75,7 @@ function Register(){
                 </Modal.Header>
                 <Modal.Body>
             <form>
-                <div className="row">
+                <div className="row" hidden={!isAdhaar}>
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
                             <label>First name</label>
@@ -56,6 +88,12 @@ function Register(){
                             <input type="text" name="lname" className="form-control" placeholder="Last name" value={userDetails.lname} onChange={handleChange}/>
                         </div>
                     </div>
+                </div>
+                <div className="row">
+                <div className="col-xs-6 col-sm-6 col-md-12">    
+                <label>Clinic Name</label>
+                            <input type="text" className="form-control" placeholder="Enter Clinic Name" name="clinicname" value={userDetails.clinicname} onChange={handleChange}/>
+                </div>
                 </div>
                 <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6">
@@ -85,7 +123,7 @@ function Register(){
                     </div>
                 </div>
                 </div>
-                <div className="row">
+                <div className="row" hidden={isGuest}>
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
                             <label>Password</label>
@@ -105,6 +143,7 @@ function Register(){
                                 checked={radioSelected === "Patient"}
                                 className="form-check-input"
                                 id="inlineRadio2"
+                                disabled
                                 value="Patient"
                                 onChange={handleChangeradio} />
                             <label className="form-check-label" htmlFor="inlineRadio2">Patient</label>
@@ -128,23 +167,38 @@ function Register(){
                             <label className="form-check-label" htmlFor="inlineRadio3">Guest</label>
                         </div>
                     </div>
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
-                <OtpInput
-                    value={otp}
-                    onChange={handleChangeOtp}
-                    numInputs={4}
-                    separator={<span>-</span>}
-                />
-            </form>
+            </form> 
             </Modal.Body>
             <Modal.Footer>
                 <Link to="/login" className="register_link forgot-password text-right"> click here to login</Link>
-                <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)}>Close</Link>
-                <Button variant="primary" onClick={()=>{
-                    console.log('userDetails ',userDetails);
-                }}>Sign up</Button>
+                <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)
+                    }>Close</Link>
+                <Button variant="primary" onClick={handleRegister}>Sign up</Button>
             </Modal.Footer>
         </Modal>
-        );
+        ):(<Modal show={showModel} onHide={()=>{
+            setshowModel(false);
+            window.location.replace('/');
+            }}>
+            <Modal.Header closeButton>
+                <Modal.Title>Register</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <div className="card-body">
+             <OtpInput
+                 className="otpcls"
+                 value={otp}
+                 onChange={handleChangeOtp}
+                 numInputs={4}
+                 separator={<span>O</span>}
+             />
+             </div> </Modal.Body>
+            <Modal.Footer>
+                <Link to="/login" className="register_link forgot-password text-right"> click here to login</Link>
+                <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)
+                    }>Close</Link>
+                <Button variant="primary" onClick={handleOtpSubmit}>Sign up</Button>
+            </Modal.Footer>
+        </Modal>);
 }
 export default Register;
