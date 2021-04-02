@@ -7,7 +7,7 @@ function Register(){
     const [showModel,setshowModel ]=useState(true);
     const [isAdhaar, setIsAdhaar] = useState(false);
     const [radioSelected, setRadioSelected] = useState('Clinic');
-    const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true,'clinicname':''});
+    const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true,'clinicname':'','usertype':'Clinic'});
     const [otp,setOtp] = useState(0);
     const [otpFlag,setOtpFlag] = useState(true);
     const [isGuest,setIsguest] = useState(false);
@@ -32,10 +32,8 @@ function Register(){
         setRadioSelected(e.target.value);
 
         isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
-        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient});
+        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient,'clinicname':'','usertype':e.target.value});
 
-        isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
-        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient,'clinicname':''});
         if(e.target.value=='Guest'){
             setIsguest(true);
         }else{
@@ -59,7 +57,11 @@ function Register(){
     }
     let handleOtpSubmit = e =>{
         if(otp==inputOtp){
-            console.log("Register success");
+            console.log("Register success",userDetails);
+            let obj = {name:userDetails.clinicname,emailxyz:userDetails.email,phone:userDetails.mobile,passwd:userDetails.password};
+            axios.post('http://localhost:5000/registerclinic',obj).then(res =>{
+                console.log('Response from testConnection',res);
+            }).catch(err=>console.log(err));
         }else{
             console.log("Invalid OTP");
         }
@@ -90,7 +92,7 @@ function Register(){
                     </div>
                 </div>
                 <div className="row">
-                <div className="col-xs-6 col-sm-6 col-md-12">    
+                <div className="col-xs-6 col-sm-6 col-md-12" hidden={isGuest}>    
                 <label>Clinic Name</label>
                             <input type="text" className="form-control" placeholder="Enter Clinic Name" name="clinicname" value={userDetails.clinicname} onChange={handleChange}/>
                 </div>

@@ -9,7 +9,7 @@ function Login() {
     const [showModel, setshowModel] = useState(true);
     const [isAdhaar, setIsAdhaar] = useState(true);
     const [radioSelected, setRadioSelected] = useState('Patient');
-    const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':''});
+    const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient'});
     const [isGuest,setIsguest] = useState(false);
     const [isotp,setIsOtp] = useState(false);
     const [otp,setOtp] = useState(0);
@@ -27,7 +27,7 @@ function Login() {
         console.log('isPatient ',isPatient);
         setRadioSelected(e.target.value);
         isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
-        setUserDetails({'isPatient':isPatient,'adhaarNumber':'','email':'','password':''});
+        setUserDetails({'isPatient':isPatient,'adhaarNumber':'','email':'','password':'','usertype':e.target.value});
         if(e.target.value=='Guest'){
             setIsguest(true);
         }else{
@@ -126,11 +126,10 @@ function Login() {
                     <Link to="/register" className="register_link"> click here to register</Link>
                     <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)}>Close</Link>
 
-                    <Link className="btn btn-primary" to='/patientd' onClick={()=>{
+                    <Link className="btn btn-primary" to='/dashboard' onClick={()=>{
                         console.log('UserDetails ',userDetails);
-
                     }}>Login</Link>
-                    <Link to="/clinicdashboard" className="btn btn-primary" onClick={handleLogin}>Login</Link>
+                    
 
                 </Modal.Footer>
             </Modal>

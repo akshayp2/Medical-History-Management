@@ -41,9 +41,9 @@ function App() {
       <Route exact strict path="/clinicd">
        <ClinicD></ClinicD>
       </Route>
-      <Route exact strict path="/patientd">
-      <PatientD></PatientD>
-
+      <Route exact strict path="/dashboard">
+      <PatientD/>
+      </Route>
       <Route exact strict path="/clinicdashboard">
         <ClinicDashboard/>
       </Route>
