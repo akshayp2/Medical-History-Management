@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 function Register(){
+    let history = useHistory();
     const [showModel,setshowModel ]=useState(true);
     const [isAdhaar, setIsAdhaar] = useState(false);
     const [radioSelected, setRadioSelected] = useState('Clinic');
@@ -48,12 +50,17 @@ function Register(){
 
     let handleRegister = evt => {
         console.log('User Detail -->',userDetails);
-        setOtpFlag(false);
-        let obj = {phone:userDetails.mobile};
-        axios.post(`http://localhost:9000/otpverify`,obj).then(res=>{
-            console.log('Res -->',res);
-            setInputOtp(res.data);
-        }).catch(err=>console.log(err));
+        if(userDetails.usertype=="Clinic"){
+            console.log('Clinic selected');
+            history.push('/clinicverification');
+        }else{
+            setOtpFlag(false);
+            let obj = {phone:userDetails.mobile};
+            axios.post(`http://localhost:9000/otpverify`,obj).then(res=>{
+                console.log('Res -->',res);
+                setInputOtp(res.data);
+            }).catch(err=>console.log(err));
+        }
     }
     let handleOtpSubmit = e =>{
         if(otp==inputOtp){

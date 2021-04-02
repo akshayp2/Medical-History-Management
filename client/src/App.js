@@ -11,6 +11,7 @@ import PatientD from './components/PatientDashboard';
 import ClinicD from './components/ClinicDashbord';
 import ClinicDashboard from './components/clinicDashboard';
 import PersonDetails from './components/personDetails';
+import ClinicVerification from './components/clinicverification';
 
 
 
@@ -46,6 +47,9 @@ function App() {
       </Route>
       <Route exact strict path="/clinicdashboard">
         <ClinicDashboard/>
+      </Route>
+      <Route exact strict path="/clinicverification">
+        <ClinicVerification/>
       </Route>
       <Route exact strict path="/persondetail/:personid">
         <PersonDetails/>
