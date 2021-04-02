@@ -12,6 +12,8 @@ import ClinicD from './components/ClinicDashbord';
 import ClinicDashboard from './components/clinicDashboard';
 import PersonDetails from './components/personDetails';
 import ClinicVerification from './components/clinicverification';
+import AddPatient from './components/addPatient';
+import DeletePrompt from './components/promptdelete';
 
 
 
@@ -50,6 +52,14 @@ function App() {
       </Route>
       <Route exact strict path="/clinicverification">
         <ClinicVerification/>
+      </Route>
+      <Route exact strict path="/promptdelete">
+        <DeletePrompt/>
+        <ClinicDashboard/>
+      </Route>
+      <Route exact strict path="/addpatient">
+        <AddPatient/>
+        <ClinicDashboard/>
       </Route>
       <Route exact strict path="/persondetail/:personid">
         <PersonDetails/>
