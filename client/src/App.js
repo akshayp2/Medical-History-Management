@@ -18,6 +18,7 @@ import DeletePrompt from './components/promptdelete';
 
 
 
+
 function App() {
   return (<div>
     <Router>
@@ -44,15 +45,24 @@ function App() {
       <Route exact strict path="/clinicd">
        <ClinicD></ClinicD>
       </Route>
+ <Route exact strict path="/patientd">
+      <PatientD></PatientD>
+      </Route>
+      <Route exact strict path="/dashboard">
+      <PatientD/>
+     </Route>
+
       <Route exact strict path="/dashboard">
       <PatientD/>
       </Route>
+
       <Route exact strict path="/clinicdashboard">
         <ClinicDashboard/>
       </Route>
       <Route exact strict path="/clinicverification">
         <ClinicVerification/>
       </Route>
+
       <Route exact strict path="/promptdelete">
         <DeletePrompt/>
         <ClinicDashboard/>
@@ -61,6 +71,7 @@ function App() {
         <AddPatient/>
         <ClinicDashboard/>
       </Route>
+
       <Route exact strict path="/persondetail/:personid">
         <PersonDetails/>
       </Route>
