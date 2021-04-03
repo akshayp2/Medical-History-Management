@@ -19,6 +19,7 @@ import AdmiClinicVerification  from './components/adminclinicVirification';
 import AdminLogin from "./components/adminLogin";
 
 
+
 function App() {
   return (<div>
     <Router>
@@ -50,10 +51,18 @@ function App() {
       <Header />
        <ClinicD></ClinicD>
       </Route>
+ <Route exact strict path="/patientd">
+      <PatientD></PatientD>
+      </Route>
+      <Route exact strict path="/dashboard">
+      <PatientD/>
+     </Route>
+
       <Route exact strict path="/dashboard">
       <Header />
       <PatientD/>
       </Route>
+
       <Route exact strict path="/clinicdashboard">
       <Header />
         <ClinicDashboard/>

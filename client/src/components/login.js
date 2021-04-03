@@ -12,7 +12,11 @@ function Login() {
     const [showModel, setshowModel] = useState(true);
     const [isAdhaar, setIsAdhaar] = useState(true);
     const [radioSelected, setRadioSelected] = useState('Patient');
-    const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient'});
+
+    const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient','alise':''});
+
+    //const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient'});
+
     const [isGuest,setIsguest] = useState(false);
     const [isotp,setIsOtp] = useState(false);
     const [otp,setOtp] = useState(0);

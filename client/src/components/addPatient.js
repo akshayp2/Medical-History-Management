@@ -25,7 +25,6 @@ let addPatient = e =>{
     }, 2000);
     //Add paint Api
     // Add ClinicPatient Mapping Api
-
 }
 
 return ( <Modal show={showModel} onHide={()=>{
