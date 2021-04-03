@@ -40,7 +40,7 @@ function App() {
        <ClinicD></ClinicD>
       </Route>
       <Route exact strict path="/patientd">
-      <PatientD></PatientD>
+      <PatientD></PatientD></Route>
 
       <Route exact strict path="/clinicdashboard">
         <ClinicDashboard/>

@@ -34,9 +34,9 @@ function Register(){
         isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient});
 
-        isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
+        isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient,'clinicname':''});
-        if(e.target.value=='Guest'){
+        if(e.target.value==='Guest'){
             setIsguest(true);
         }else{
             setIsguest(false);
@@ -58,7 +58,7 @@ function Register(){
         }).catch(err=>console.log(err));
     }
     let handleOtpSubmit = e =>{
-        if(otp==inputOtp){
+        if(otp===inputOtp){
             console.log("Register success");
         }else{
             console.log("Invalid OTP");

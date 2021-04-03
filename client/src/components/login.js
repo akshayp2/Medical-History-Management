@@ -28,7 +28,7 @@ function Login() {
         setRadioSelected(e.target.value);
         isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'isPatient':isPatient,'adhaarNumber':'','email':'','password':''});
-        if(e.target.value=='Guest'){
+        if(e.target.value==='Guest'){
             setIsguest(true);
         }else{
             setIsguest(false);
