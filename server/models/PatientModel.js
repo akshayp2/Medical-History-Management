@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const PatientSchema = new Schema({
     adhaarNo:{
         type:String, //adhaar number
-        required:true,
+        required:false,
         // unique:true //uncomment this after testing
     },
     fname:{
@@ -72,6 +72,10 @@ const PatientSchema = new Schema({
     usertype:{
         type:String, // guest,patient
         required:true
+    },
+    verified:{
+        type:Boolean,
+        default:false
     }
 });
 const PatientModel = mongoose.model('Patient',PatientSchema);
