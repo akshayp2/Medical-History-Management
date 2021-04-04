@@ -9,7 +9,7 @@ function Login() {
     const [showModel, setshowModel] = useState(true);
     const [isAdhaar, setIsAdhaar] = useState(true);
     const [radioSelected, setRadioSelected] = useState('Patient');
-    const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':''});
+    const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient'});
     const [isGuest,setIsguest] = useState(false);
     const [isotp,setIsOtp] = useState(false);
     const [otp,setOtp] = useState(0);
@@ -27,8 +27,10 @@ function Login() {
         console.log('isPatient ',isPatient);
         setRadioSelected(e.target.value);
         isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
-        setUserDetails({'isPatient':isPatient,'adhaarNumber':'','email':'','password':''});
+
+        setUserDetails({'isPatient':isPatient,'adhaarNumber':'','email':'','password':'','usertype':e.target.value});
         if(e.target.value==='Guest'){
+
             setIsguest(true);
         }else{
             setIsguest(false);
@@ -64,12 +66,12 @@ function Login() {
                 <Modal.Body>
                     <form hidden={isGuest}>
                         <div className="form-group" hidden={isAdhaar}>
-                            <label>Email</label>
+                            <label>Email</label><span className="required-input">*</span>
                             <input type="email" className="form-control" placeholder="Enter email" name="email" value={userDetails.email} onChange={handleChange}/>
                         </div>
                         <div className="form-group" hidden={!isAdhaar}>
-                            <label>Adhaar Number</label>
-                            <input type="text" className="form-control" placeholder="Enter Adhaar Number" name="adhaarNumber" value={userDetails.adhaarNumber} onChange={handleChange}/>
+                            <label>Email</label>
+                            <input type="text" className="form-control" placeholder="Enter email" name="email" value={userDetails.email} onChange={handleChange}/>
                         </div>
                         <div className="form-group">
                             <label>Password</label>
@@ -126,11 +128,11 @@ function Login() {
                     <Link to="/register" className="register_link"> click here to register</Link>
                     <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)}>Close</Link>
 
-                    <Link className="btn btn-primary" to='/patientd' onClick={()=>{
-                        console.log('UserDetails ',userDetails);
 
+                    <Link className="btn btn-primary" to='/dashboard' onClick={()=>{
+                        console.log('UserDetails ',userDetails);
                     }}>Login</Link>
-                    <Link to="/clinicdashboard" className="btn btn-primary" onClick={handleLogin}>Login</Link>
+
 
                 </Modal.Footer>
             </Modal>
