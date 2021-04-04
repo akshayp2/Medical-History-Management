@@ -1,11 +1,15 @@
 import { useEffect,useState} from "react";
 import React, { Component } from 'react';
-import { Button,Accordion,Card,Form } from 'react-bootstrap';
+import { Button,Accordion,Card,Form} from 'react-bootstrap';
+import { GrStatusPlaceholder } from "react-icons/gr";
+
+
 function PersonDetails(){
     const [open, setOpen] = useState(false);
 useEffect(()=>{
     console.log('location ',window.location);
-})    
+}) 
+   
 return (
 
     <Accordion defaultActiveKey="0">
@@ -16,7 +20,37 @@ return (
         </Accordion.Toggle>
       </Card.Header>
       <Accordion.Collapse eventKey="0">
-        <Card.Body>Hello! I'm the body</Card.Body>
+        <Card.Body>
+            <form className="container" style={{paddig:"5px"}}>
+                
+            <div className="row">
+                    <div className="col-xs-6 col-sm-6 col-md-2">
+                        <div className="form-group">
+                            <label>First name</label>
+                            
+                        </div>
+                    </div>    
+                    <div className="col-xs-6 col-sm-6 col-md-3">
+                        <div className="form-group">
+                           
+                            <input type="text" name="lname" className="form-control" placeholder="First name" />
+                        </div>
+                    </div><div  className="col-xs-6 col-sm-6 col-md-2"></div>
+                    <div className="col-xs-6 col-sm-6 col-md-2">
+                        <div className="form-group">
+                            <label>Last Name</label>
+                           
+                        </div>
+                    </div> <div className="col-xs-6 col-sm-6 col-md-3">
+                        <div className="form-group">
+                           
+                            <input type="text" name="lname" className="form-control" placeholder="Last Name" />
+                        </div>
+                    </div>
+                </div>
+       
+            </form>
+        </Card.Body>
       </Accordion.Collapse>
     </Card>
     <Card>
